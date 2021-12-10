@@ -40,12 +40,14 @@ def three_consec(data):
 
 
 
-
-path = r'data_2.txt'
-operation = 'r'
-data =open_file(path, operation)
-
-print(len(data))
-print(how_often_increase(data))
-
-three_consec(data)
+# =============================================================================
+# 
+# path = r'data_2.txt'
+# operation = 'r'
+# data =open_file(path, operation)
+# 
+# print(len(data))
+# print(how_often_increase(data))
+# 
+# three_consec(data)
+# =============================================================================
