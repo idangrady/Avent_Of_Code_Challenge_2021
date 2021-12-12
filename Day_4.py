@@ -118,45 +118,22 @@ numbers = hashed_list[0]
 
 last_board = 0
 target = 5
+
+reminding = []
+
 for num in list_values:
-    for board in hashed_list[1:]:
-        state = is_done(board, num, target)
-        if(state):
-            print(state)
-            print("finish")
-            score = if_done(board, num)
-            last_board = score
+    for  board in (hashed_list[1:]):
+        if (board not in reminding):
+            state = is_done(board, num, target)
+            if(state):
+                print(state)
+                print("finish")
+                score = if_done(board, num)
+                last_board = score
+                reminding.append(board[1])
+            
             
 
 print(last_board)
 
 
-
-
-
-
-
-# =============================================================================
-# 
-#     # if not:
-# # add to hash
-# hash_table[num] += np.ones(1)
-# 
-# # cheack row 
-# for row in arr: 
-#     count = 0
-#     for curr_num in row: 
-#         if hash_table[curr_num] ==np.ones(1):
-#             count+=1
-#         if(count ==len(row)): return True
-#         
-# # Check colomn
-# for col in range(5):
-#     corr_col = arr[:,col].T
-#     
-#     for curr_col_num in corr_col:
-#         count = 0
-#         if hash_table[curr_num] ==np.ones(1):
-#             count+=1
-#         if(count ==len(row)): return True
-# =============================================================================
