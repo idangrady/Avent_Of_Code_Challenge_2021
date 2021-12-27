@@ -5,32 +5,29 @@ import numpy as np
 
 def open_file(filename, operation):
     with open(filename, operation) as file_1:
-        read_data = file_1.readlines()
-        return read_data
+        return file_1.readlines()
 
 def how_often_increase(data):
     count = 0
-    previous_loc = 0
-    for loc in range(1,len(data)): 
+    for previous_loc, loc in enumerate(range(1,len(data))): 
         
         current = data[loc]
         previous = data[previous_loc]
-        
+
         if current > previous: 
             count +=1
-        
-        previous_loc +=1
+
     return count
             
             
 
 def three_consec(data):
     data = list(map(int,data))
-    count = 0
-    for i in range(len(data)):
-        if((np.sum(data[i+1:i+4]))> (np.sum(data[i:i+3]))):
-            count +=1
-            
+    count = sum(
+        ((np.sum(data[i + 1 : i + 4])) > (np.sum(data[i : i + 3])))
+        for i in range(len(data))
+    )
+
     print(count)
                     
         

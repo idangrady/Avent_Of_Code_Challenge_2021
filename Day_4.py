@@ -4,8 +4,7 @@ import numpy as np
 
 def open_file(filename, operation):
     with open(filename, operation) as file_1:
-        read_data = file_1.readlines()
-        return read_data
+        return file_1.readlines()
 
 
 def split_data(data):
@@ -37,21 +36,21 @@ def split_data(data):
 
 
 def if_done(board, num):
-     hash_ , lis, row_values, col_values = board
-     flattened_col  = [int(val) for sublist in col_values for val in sublist]
-     flattened_row  = [int(val) for sublist in row_values for val in sublist]
-     merged_  = flattened_col+flattened_row
+    hash_ , lis, row_values, col_values = board
+    flattened_col  = [int(val) for sublist in col_values for val in sublist]
+    flattened_row  = [int(val) for sublist in row_values for val in sublist]
+    merged_  = flattened_col+flattened_row
 
-     count = 0
-     all_indexed = hash_[hash_[0:]==1]
-     #find all the values which have not been called yet
-     for row in lis:
-        for item in row: 
-            item = int(item)
-            if item not in merged_:
-                count += item
- 
-     return(num * count)
+    count = 0
+    all_indexed = hash_[hash_[:] == 1]
+    #find all the values which have not been called yet
+    for row in lis:
+       for item in row: 
+           item = int(item)
+           if item not in merged_:
+               count += item
+
+    return(num * count)
      
     
 
