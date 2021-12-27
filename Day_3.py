@@ -19,19 +19,18 @@ def part_1(data):
     average__ = np.average(array_data, axis = 0)
     eps_ = list( np.where(average__>= 0.5,1,0))
     gamma_ = np.where(average__<= 0.5,1,0)
-    
-    multiply_part_1 = (int(binatodeci(eps_))) * (int(binatodeci(gamma_)))
-    return (multiply_part_1)
+
+    return (int(binatodeci(eps_))) * (int(binatodeci(gamma_)))
 
 
 def part_2(data):
     array_ = make_array_int(data)
     d,n = array_.shape
-    
+
     remine_ox = array_
     remine_co2 = array_
 
-    
+
     output_oxygen =[]
     output_co2 =[]
     for i in range(n):
@@ -43,23 +42,19 @@ def part_2(data):
 
         output_oxygen.append(decide_oxygen)
         output_co2.append(decide_oxygen)
-        
+
 
         d_ox, n_ox = remine_ox.shape
         d_co, n_ox = remine_co2.shape
-        
-        if (d_co != 1 and d_ox !=1): 
+
+        if d_co == 1:
+            pass
+        elif d_ox == 1:
+            remine_co2 = remine_co2[remine_co2[:,i]==decide_co2]
+        else: 
             remine_ox = remine_ox[remine_ox[:,i]==decide_oxygen]
             remine_co2 = remine_co2[remine_co2[:,i]==decide_co2]
-            
-        else :
-            if (d_ox == 1  and  d_co !=1): 
-                remine_co2 = remine_co2[remine_co2[:,i]==decide_co2]
-            elif (d_ox != 1  and  d_co ==1): 
-                remine_ox = remine_ox[remine_ox[:,i]==decide_oxygen]
-            else: 
-                pass
-            
+
     num_ox = binatodeci(remine_ox[0])
     num_co = binatodeci(remine_co2[0])
     return(num_ox * num_co)

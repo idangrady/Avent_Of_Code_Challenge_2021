@@ -18,9 +18,8 @@ def movement(data):
     forward: add horizintal
     (h,d)
     """
-    idx = 0
     loc =np.zeros(2)
-    for  (itter) in (data):
+    for idx, (itter) in enumerate((data)):
         itter= (itter.split(' '))
         step, val = (str(itter[0])[0]).lower(), int(itter[-1])
         if (step =='u'):
@@ -29,13 +28,11 @@ def movement(data):
             move = np.array((0,val))
         elif step =='f':
             move = np.array((val,0))
-            
+
         loc  +=move
-        
+
         if idx ==len(data)-1:
-            mul =  loc[0] * loc[1]
-            return mul
-        idx+=1
+            return loc[0] * loc[1]
         
 def movement_2(data):
     """
@@ -47,9 +44,8 @@ def movement_2(data):
 
     (h,d,a)
     """
-    idx = 0
     loc =np.zeros(3)
-    for  (itter) in (data):
+    for idx, (itter) in enumerate((data)):
         itter= (itter.split(' '))
         step, val = (str(itter[0])[0]).lower(), int(itter[-1])
         if (step =='u'):
@@ -59,13 +55,11 @@ def movement_2(data):
         elif step =='f':
             depth = loc[2] * val
             move = np.array((val,depth, 0))
-            
+
         loc  +=move
-        
+
         if idx ==len(data)-1:
-            mul =  loc[0] * loc[1]
-            return mul
-        idx+=1
+            return loc[0] * loc[1]
         
         
 print(movement_2(data))
