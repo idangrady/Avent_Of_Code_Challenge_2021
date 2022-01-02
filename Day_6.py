@@ -13,7 +13,7 @@ def clean(data):
     return arr_data
 
 def check_end(arr):
-    sum_ =np.where(arr==0,1,0).sum()
+    sum_ =np.where(arr==-1,1,0).sum()
     return sum_
 
 def add_arr(arr, add):
@@ -21,16 +21,17 @@ def add_arr(arr, add):
     return (np.concatenate((arr, add), axis = 1))
 
 def reset_( arr):
-    idx = np.argwhere(arr ==0)[:,1].reshape(1,-1)
-    arr[0][tuple(list(idx))] += 6
+    idx = np.argwhere(arr ==-1)[:,1].reshape(1,-1)
+    arr[0][tuple(list(idx))] += 7
     return arr
 
 
-def concat_(arr, days):
+def concat_(arr, days, print_ = False):
     curr_arr = arr
     
     for day in range(1, days+1):
-        print(f"Day: {day}, Amount: {curr_arr.shape[1]}")
+        if print_:
+            print(f"Day: {day}, Amount: {curr_arr.shape[1]}")
 
         sub = np.ones(curr_arr.shape)
         curr_arr= curr_arr - sub
@@ -54,5 +55,5 @@ if __name__ == "__main__":
     
     arr_data = clean(data)
     
-    amount_lanternfish = concat_(arr_data, 80)
+    amount_lanternfish = concat_(arr_data, 256)
     print(amount_lanternfish)
