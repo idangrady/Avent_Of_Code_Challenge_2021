@@ -29,7 +29,8 @@ def reset_( arr):
 def concat_(arr, days):
     curr_arr = arr
     
-    for day in range(days):
+    for day in range(1, days+1):
+        print(f"Day: {day}, Amount: {curr_arr.shape[1]}")
 
         sub = np.ones(curr_arr.shape)
         curr_arr= curr_arr - sub
