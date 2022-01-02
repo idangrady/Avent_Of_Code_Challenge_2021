@@ -23,27 +23,18 @@ class Point():
             return False
     
     def overlap(self, horizontal = True):
+        x = np.linspace(self.x1, self.x2, self.lenth_x).reshape(-1,1)
+        y = np.linspace(self.y1, self.y2, self.lenth_y).reshape(-1,1)
+
         if horizontal:
             if self.lenth_y<=1:
-                x = np.linspace(self.x1, self.x2, self.lenth_x).reshape(-1,1)
-                y = np.zeros((self.lenth_x,1)) + int(self.y2)
-            elif self.lenth_x<=1:
-                y = np.linspace(self.y1, self.y2, self.lenth_y).reshape(-1,1)
-                x = np.zeros((self.lenth_y,1)) + int(self.x2)
-            
-            x_y = np.concatenate((x,y), axis = 1)
-            return x_y
-        else:
-            x = np.linspace(self.x1, self.x2, self.lenth_x).reshape(-1,1)
-            y = np.linspace(self.y1, self.y2, self.lenth_y).reshape(-1,1)
-    
-            if self.lenth_y<=1:
                 y = np.zeros((self.lenth_x,1)) + int(self.y2)
             elif self.lenth_x<=1:
                 x = np.zeros((self.lenth_y,1)) + int(self.x2)
             
-            x_y = np.concatenate((x,y), axis = 1)
-            return x_y
+            
+        x_y = np.concatenate((x,y), axis = 1)
+        return x_y
 
     
 
@@ -63,10 +54,19 @@ def create_grid(data, d,n):
     
     return grid, max_value, points
 
-def fill_grid(grid,points, hor=True):
+def fill_grid(grid,points, hor):
     
     for idx, point in enumerate(points):
-        if(point.ver_hor() and hor):
+        if hor:
+            if(point.ver_hor()):
+                maximu = np.maximum(point.lenth_x, point.lenth_y)
+                for i in range(maximu):
+                    try:
+                        x,y = (point.overlap(horizontal = hor)[i])
+                        grid[int(x),int(y)] +=1
+                    except Exception as e:
+                        pass
+        else:
             maximu = np.maximum(point.lenth_x, point.lenth_y)
             for i in range(maximu):
                 try:
@@ -74,7 +74,6 @@ def fill_grid(grid,points, hor=True):
                     grid[int(x),int(y)] +=1
                 except Exception as e:
                     pass
-
             
     return grid
 
@@ -95,4 +94,4 @@ if __name__ == "__main__":
     grid_2= fill_grid(grid,points, hor = False)
     
     answer_2 = np.where(grid_2>=2,1,0)
-    print(print(f" Solution for part 1 Day 5: {answer_2.sum()}"))
+    print(print(f" Solution for part 2 Day 5: {answer_2.sum()}"))
