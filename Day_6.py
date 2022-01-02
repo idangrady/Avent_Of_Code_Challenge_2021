@@ -3,14 +3,23 @@ import numpy as np
 import math
 import os
 from helper_func import importdata_
+from collections import Counter
 
 
+def count(data):
+    print(list(Counter(data).values()))
+    return Counter(data)
 
+    
+    
 def clean(data):
     data = data[0].split(',')
     data = [int(i) for i in data]
-    arr_data =np.array(data).reshape(1,-1)
-    return arr_data
+    counts =count(data)
+    counted = [counts[i] for i in range(7)]
+    set_data = np.array((list(set(data)))).reshape(1,-1)
+    arr_data =np.longdouble(data).reshape(1,-1)
+    return arr_data, counted, set_data
 
 def check_end(arr):
     sum_ =np.where(arr==-1,1,0).sum()
@@ -31,7 +40,7 @@ def concat_(arr, days, print_ = False):
     
     for day in range(1, days+1):
         if print_:
-            print(f"Day: {day}, Amount: {curr_arr.shape[1]}")
+            print(f"Day: {day}/{days}, Amount: {curr_arr.shape[1]}")
 
         sub = np.ones(curr_arr.shape)
         curr_arr= curr_arr - sub
@@ -53,7 +62,10 @@ if __name__ == "__main__":
     path= 'Data_sets/‏‏data_6.txt'
     data  = importdata_(path, 'r')
     
-    arr_data = clean(data)
+    arr_data,counted, set_array = clean(data)
     
-    amount_lanternfish = concat_(arr_data, 256)
+    amount_lanternfish = concat_(arr_data, 80, print_ = True)
+    print()
+    amount_lanternfish2 = concat_(set_array, 256, print_ = True)
+
     print(amount_lanternfish)
