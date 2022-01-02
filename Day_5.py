@@ -32,7 +32,6 @@ class Point():
             elif self.lenth_x<=1:
                 x = np.zeros((self.lenth_y,1)) + int(self.x2)
             
-            
         x_y = np.concatenate((x,y), axis = 1)
         return x_y
 
@@ -66,14 +65,7 @@ def fill_grid(grid,points, hor):
                         grid[int(x),int(y)] +=1
                     except Exception as e:
                         pass
-        else:
-            maximu = np.maximum(point.lenth_x, point.lenth_y)
-            for i in range(maximu):
-                try:
-                    x,y = (point.overlap(horizontal = hor)[i])
-                    grid[int(x),int(y)] +=1
-                except Exception as e:
-                    pass
+
             
     return grid
 
